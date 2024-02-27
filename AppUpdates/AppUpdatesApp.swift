@@ -11,6 +11,11 @@ import SwiftUI
 struct AppUpdatesApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        print("init")
+        Updates.imports()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
