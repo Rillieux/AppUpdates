@@ -34,7 +34,7 @@ class Updates {
             }
         }
         
-        func importUpdate(thisVersion: String, colorString: String) {
+        func performUpdate(thisVersion: String, colorString: String) {
             let lastSavedAppVersion: String = defaults.string(forKey: .lastestAppVersion) ?? "0.0"
             let updateNeeded = compareVersions(installedVersion: lastSavedAppVersion, updateVersion: thisVersion)
             
@@ -50,9 +50,31 @@ class Updates {
         }
         
         initialImport()
-        importUpdate(thisVersion: "1.1", colorString: colorstrings_1_1)
-        importUpdate(thisVersion: "1.2", colorString: colorstrings_1_2)
-        importUpdate(thisVersion: "1.3", colorString: colorstrings_1_3)
+        performUpdate(thisVersion: "1.1", colorString: colorstrings_1_1)
+        performUpdate(thisVersion: "1.2", colorString: colorstrings_1_2)
+        performUpdate(thisVersion: "1.3", colorString: colorstrings_1_3)
+        performUpdate_1_4()
+
+        func performUpdate_1_4() {
+            let thisVersion = "1.4"
+            let lastSavedAppVersion: String = defaults.string(forKey: .lastestAppVersion) ?? "0.0"
+            let updateNeeded = compareVersions(installedVersion: lastSavedAppVersion, updateVersion: thisVersion)
+
+            if !updateNeeded {
+                print("Current")
+                print("App has alreaedy been updated to version \(thisVersion)\n")
+            } else {
+                let predicate = NSPredicate(format: "displayOrder == %@", "2")
+                let savedColor: [SavedColor] = dataService.getColors(predicate)
+                
+                savedColor[0].colorHexString = "#FF0000"
+                dataService.updateColor(savedColor[0])
+
+                print("Needs update for version \(thisVersion)")
+                defaults.set(thisVersion, forKey: .lastestAppVersion)
+                print("App has been updated to version \(thisVersion)\n")
+            }
+        }
 
         func databaseEntityIsEmpty() -> Bool {
             let colorsInDataBase = dataService.getColors(nil)
