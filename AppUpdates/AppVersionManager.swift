@@ -1,8 +1,6 @@
 //
 //  AppVersionManager.swift
 //
-//  Created by Dave Kondris on 02/08/21.
-//  Copyright © 2021 Dave Kondris. All rights reserved.
 //
 
 import Foundation
@@ -29,7 +27,7 @@ extension UserDefaults {
   }
 }
 
-func isCurrentVersion() -> Bool {
+public func isCurrentVersion() -> Bool {
     printVersions()
     var isCurrent: Bool
     
@@ -41,7 +39,6 @@ func isCurrentVersion() -> Bool {
     if lastSavedAppVersion != currentAppVersion as! String {
         print("The previous version is out of date")
         isCurrent = false
-//        defaults.set(currentAppVersion, forKey: .lastestAppVersion)
     } else {
         print("The previous version is up to date")
         isCurrent = true
@@ -50,6 +47,49 @@ func isCurrentVersion() -> Bool {
     return isCurrent
 
 }
+
+public func compareVersions(installedVersion: String, updateVersion: String) -> Bool {
+    let installedVersionsSplit = installedVersion.components(separatedBy: ".")
+    let installedMajor = installedVersionsSplit[0]
+    let installedMinor = installedVersionsSplit[1]
+    
+    let updateVersionSplit = updateVersion.components(separatedBy: ".")
+    let updateMajor = updateVersionSplit[0]
+    let updateMinor = updateVersionSplit[1]
+
+    var updateNeeded: Bool = false
+    
+    print("Installed Major: \(installedMajor), Minor: \(installedMinor)")
+    print("Update Major: \(updateMajor), Minor: \(updateMinor)")
+    
+    let installedMajorInt = Int(installedMajor) ?? nil
+    let installedMinorInt = Int(installedMinor) ?? nil
+
+    let updateMajorInt = Int(updateMajor) ?? nil
+    let updateMinorInt = Int(updateMinor) ?? nil
+    
+    if installedMajor < updateMajor {
+        print("Installed Major < Update Major ")
+    } else if installedMajor == updateMajor {
+        print("Installed Major = Update Major ")
+    } else {
+        print("Installed Major > Update Major ")
+    }
+
+    if installedMinor < updateMinor {
+        print("Installed Minor < Update Minor ")
+        updateNeeded = true
+    } else if installedMinor == updateMinor {
+        updateNeeded = false
+        print("Installed Minor = Update Minor ")
+    } else {
+        updateNeeded = false
+        print("Installed Minor > Update Minor ")
+    }
+    
+    return updateNeeded
+}
+
 
 public func printVersions() {
     

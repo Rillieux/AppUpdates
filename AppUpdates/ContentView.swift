@@ -19,9 +19,13 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(items) { color in
+                    VStack (alignment: .leading, spacing: 2) {
                         Text(color.colorHexString ?? "missing")
-                        .font(.headline)
-                        .foregroundStyle(.white)
+                            .font(.headline)
+                        Text(color.id?.uuidString ?? "")
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.white)
                     .listRowBackground(color.color)
                 }
             }

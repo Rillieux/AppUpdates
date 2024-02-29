@@ -19,3 +19,17 @@ let colorstrings_1_1: String = """
 6|#fffd79
 7|#6a329f
 """
+
+let colorstrings_1_2: String = """
+8|#333333
+9|#ccdd22
+"""
+
+let colorstrings_1_3: String = """
+10|#147274
+11|#0e2b7b
+12|#00693e
+13|#004225
+14|#113392
+15|#b2a0b2
+"""

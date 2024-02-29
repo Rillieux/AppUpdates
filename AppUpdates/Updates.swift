@@ -8,7 +8,7 @@
 import SwiftUI
 
 class Updates {
-    
+        
     static func imports() {
         
         let dataService: SavedColorDataServiceProtocol = SavedColorDataService()
@@ -17,6 +17,7 @@ class Updates {
         print("static func imports()")
         
         func initialImport() {
+            let thisVersion: String = "1.0"
             print("initialImports()")
             if isCurrentVersion() {
                 print("--- Current")
@@ -27,29 +28,32 @@ class Updates {
             if !databaseEntityIsEmpty() {
                 parseColorString(initialColorsString)
                 defaults.set("1.0", forKey: .lastestAppVersion)
-                print("App has been updated to version 1.0")
+                print("App has been updated to version \(thisVersion)\n")
             } else {
-                print("App has alreaedy been updated to version 1.0")
+                print("App has alreaedy been updated to version \(thisVersion)\n")
             }
         }
         
-        func import_1_1() {
-            if isCurrentVersion() {
+        func importUpdate(thisVersion: String, colorString: String) {
+            let lastSavedAppVersion: String = defaults.string(forKey: .lastestAppVersion) ?? "0.0"
+            let updateNeeded = compareVersions(installedVersion: lastSavedAppVersion, updateVersion: thisVersion)
+            
+            if !updateNeeded {
                 print("Current")
-                print("App has alreaedy been updated to version 1.1")
+                print("App has alreaedy been updated to version \(thisVersion)\n")
             } else {
-                print("Needs update for 1.1")
-                parseColorString(colorstrings_1_1)
-                defaults.set("1.1", forKey: .lastestAppVersion)
-                print("App has been updated to version 1.1")
+                print("Needs update for version \(thisVersion)")
+                parseColorString(colorString)
+                defaults.set(thisVersion, forKey: .lastestAppVersion)
+                print("App has been updated to version \(thisVersion)\n")
             }
-
         }
         
-
         initialImport()
-        import_1_1()
-                
+        importUpdate(thisVersion: "1.1", colorString: colorstrings_1_1)
+        importUpdate(thisVersion: "1.2", colorString: colorstrings_1_2)
+        importUpdate(thisVersion: "1.3", colorString: colorstrings_1_3)
+
         func databaseEntityIsEmpty() -> Bool {
             let colorsInDataBase = dataService.getColors(nil)
             if colorsInDataBase.isEmpty {
@@ -61,7 +65,6 @@ class Updates {
 
         func parseColorString(_ colors: String) {
             print("parseColorString()")
-
             let colorsBeingImported = colors.components(separatedBy: "\n")
             for color in colorsBeingImported {
                 parseColor(color)
@@ -73,7 +76,5 @@ class Updates {
             let parts = color.components(separatedBy: "|")
             dataService.addColor(id: UUID(), color: Color(hex: parts[1]) ?? Color.gray, displayOrder: Int(parts[0]) ?? 0)
         }
-        
-
     }
 }
