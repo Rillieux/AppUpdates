@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A66373B12B9F210C005195B0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A66373B02B9F210C005195B0 /* Localizable.xcstrings */; };
 		A6BD37D42B8DD03A00C05221 /* AppUpdatesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BD37D32B8DD03A00C05221 /* AppUpdatesApp.swift */; };
 		A6BD37D62B8DD03A00C05221 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BD37D52B8DD03A00C05221 /* ContentView.swift */; };
 		A6BD37D82B8DD03B00C05221 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6BD37D72B8DD03B00C05221 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A66373B02B9F210C005195B0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		A6BD37D02B8DD03A00C05221 /* AppUpdates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppUpdates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BD37D32B8DD03A00C05221 /* AppUpdatesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdatesApp.swift; sourceTree = "<group>"; };
 		A6BD37D52B8DD03A00C05221 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				A6BD37DE2B8DD03B00C05221 /* AppUpdates.xcdatamodeld */,
 				A6BD37E62B8DD19800C05221 /* SavedColor+Manager.swift */,
 				A6BD37EA2B8DD6C000C05221 /* Updates.swift */,
+				A66373B02B9F210C005195B0 /* Localizable.xcstrings */,
 				A6BD37EE2B8DE2AA00C05221 /* AppVersionManager.swift */,
 				A6BD37EC2B8DD6FF00C05221 /* Colors+Strings.swift */,
 				A6BD37E82B8DD45F00C05221 /* Color+Extensions.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				A6BD37DB2B8DD03B00C05221 /* Preview Assets.xcassets in Resources */,
 				A6BD37D82B8DD03B00C05221 /* Assets.xcassets in Resources */,
+				A66373B12B9F210C005195B0 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
