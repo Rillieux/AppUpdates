@@ -2,7 +2,7 @@
 //  Updates.swift
 //  AppUpdates
 //
-//  Created by Perrache on 27.02.2024..
+//  Created by Perrache on 27.02.2024.
 //
 
 import SwiftUI
@@ -17,7 +17,7 @@ class Updates {
         print("static func imports()")
         
         func initialImport() {
-            let thisVersion: String = "1.0"
+            let thisVersion: String = "2.0"
             print("initialImports()")
             if isCurrentVersion() {
                 print("--- Current")

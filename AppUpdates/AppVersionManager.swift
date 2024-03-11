@@ -1,7 +1,6 @@
 //
 //  AppVersionManager.swift
 //
-//
 
 import Foundation
 
@@ -28,6 +27,7 @@ extension UserDefaults {
 }
 
 public func isCurrentVersion() -> Bool {
+    print("\nisCurrentVersion")
     printVersions()
     var isCurrent: Bool
     
@@ -37,10 +37,10 @@ public func isCurrentVersion() -> Bool {
     let lastSavedAppVersion: String = defaults.string(forKey: .lastestAppVersion) ?? "0"
     
     if lastSavedAppVersion != currentAppVersion as! String {
-        print("The previous version is out of date")
+        print("WARNING: The app is not up to date.")
         isCurrent = false
     } else {
-        print("The previous version is up to date")
+        print("The app is up to date.")
         isCurrent = true
     }
 
@@ -49,6 +49,7 @@ public func isCurrentVersion() -> Bool {
 }
 
 public func compareVersions(installedVersion: String, updateVersion: String) -> Bool {
+    print("\ncompareVersions()")
     let installedVersionsSplit = installedVersion.components(separatedBy: ".")
     let installedMajor = installedVersionsSplit[0]
     let installedMinor = installedVersionsSplit[1]
@@ -93,11 +94,12 @@ public func compareVersions(installedVersion: String, updateVersion: String) -> 
 
 public func printVersions() {
     
+    print("\nprintVersions()")
     let currentAppVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "0"
     
     let defaults = UserDefaults.standard
     let lastSavedAppVersion: String = defaults.string(forKey: .lastestAppVersion) ?? "0"
     
     print("NEW VERSION = \(String(describing: currentAppVersion))")
-    print("SAVED VERSION = \(String(describing: lastSavedAppVersion))")
+    print("LAST UPDATED VERSION = \(String(describing: lastSavedAppVersion))")
 }
